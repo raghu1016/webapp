@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>Customer Directory</title>
+</head>
+<body>
+<div class="container">
+
+    <h3>Customer Directory</h3>
+    <hr>
+    <a th:href="@{/customers/showFormForAdd}" class = "btn btn-primary btn-sm mb-3">Add Customer</a>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Street</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="temp : ${customers}">
+
+            <td th:text="${temp.firstName}" />
+            <td th:text="${temp.lastName}" />
+            <td th:text="${temp.street}" />
+            <td th:text="${temp.address}" />
+            <td th:text="${temp.city}" />
+            <td th:text="${temp.state}" />
+            <td th:text="${temp.email}" />
+            <td th:text="${temp.phone}" />
+            <td>
+                <a th:href="@{/customers/showFormForUpdate(customersId=${temp.id})}"
+                   class ="btn btn-info btn-sm"
+                >
+                Update
+                </a>
+                <a th:href="@{/customers/delete(customersId=${temp.id})}"
+                   class ="btn btn-danger btn-sm"
+                   onclick = "if (!(confirm('Are you sure you want to delete this customer'))) return false"
+                >
+                 Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
